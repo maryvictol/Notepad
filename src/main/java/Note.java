@@ -1,3 +1,5 @@
+package main.java;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -16,11 +18,6 @@ public class Note {
         this.lastUpdatedDate = lastUpdatedDate;
     }
 
-    public String getDate(Date date) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        return dateFormat.format(date);
-    }
-
     public void setTitle(String title) {
         this.title = title;
     }
@@ -37,16 +34,14 @@ public class Note {
         this.lastUpdatedDate = new Date();
     }
 
-    /* public void setTitle(String title) {
-            this.title = null == title ? "no title" : title;
-        }
-
-    public void setDescription(String description) {
-        this.description = null == description ? "no description" : description;
-    }*/
-
     public String getDescription() {
         return description;
+    }
+
+    public void modifyNote(String title, String description) {
+        setTitle(title);
+        setDescription(description);
+        setLastUpdatedDate();
     }
 
     @Override
@@ -55,6 +50,11 @@ public class Note {
                 "description:  " + description + "\n" +
                 "Date Created: " + getDate(createdDate) + "\n" +
                 "Last Updated Date: " + getDate(lastUpdatedDate) + "\n");
+    }
+
+    private String getDate(Date date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        return dateFormat.format(date);
     }
 
 }

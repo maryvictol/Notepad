@@ -1,19 +1,18 @@
-import java.util.Date;
+package main.java;
 
 public class Notepad {
 
     static int counterNotes = 0;
-    private static int maxNumberNotes = 10;  //initial Notepad size
-    private static Note[] notes = new Note[maxNumberNotes];
+    public static int maxNumberNotes = 10;  //initial main.java.Notepad size
+    public static double increaseKoeff = 1.5;
 
-    public Notepad() {
-        this.notes = notes;
-    }
+
+    private Note[] notes = new Note[maxNumberNotes];
 
     //Add Note to Notepad
     public void addNote(Note note) {
         if (counterNotes == maxNumberNotes) {
-            int newMaxNumberNotes = (int) Math.ceil(maxNumberNotes * 1.5);
+            int newMaxNumberNotes = (int) Math.ceil(maxNumberNotes * increaseKoeff);
             Note[] tempNotes = new Note[newMaxNumberNotes];
             System.arraycopy(notes, 0, tempNotes, 0, maxNumberNotes);
             notes = tempNotes;
@@ -34,13 +33,13 @@ public class Notepad {
         } else {
             for (int numNotes = 0; numNotes < counterNotes-1; numNotes++) {
                 if (allNotes[numNotes] != null) {
-                    System.out.println(allNotes[numNotes].toString());
+                    System.out.println(allNotes[numNotes]);
                 }
             }
         }
     }
 
-    //Search first Note by part of title
+    //Search first main.java.Note by part of title
     public int returnNoteByTitle(String title) {
         String noteName;
         for (int numNotes = 0; numNotes < notes.length; numNotes++) {
@@ -68,12 +67,22 @@ public class Notepad {
 
     public void editNote(int numberNote, String title, String description) {
         if (numberNote >= 0 && numberNote <= counterNotes-1) {
+            notes[numberNote].modifyNote(title,description);
+        } else {
+            System.out.println("Please, check required main.java.Note number");
+        }
+    }
+
+
+
+ /*   public void editNote(int numberNote, String title, String description) {
+        if (numberNote >= 0 && numberNote <= counterNotes-1) {
             notes[numberNote].setTitle(title);
             notes[numberNote].setDescription(description);
             notes[numberNote].setLastUpdatedDate();
         } else {
-            System.out.println("Please, check required Note number");
+            System.out.println("Please, check required main.java.Note number");
         }
-    }
+    }*/
 
 }

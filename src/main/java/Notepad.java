@@ -2,13 +2,13 @@ package main.java;
 
 public class Notepad {
 
-    public static final double INCREASE_KOEFF = 1.5;
-    public static final int NUM_REMOVE_NOTES =10;
-    public static final int NUM_EMPTY_NOTES = 15;
+    private static final double INCREASE_KOEFF = 1.5;
+    private static final int NUM_REMOVE_NOTES =10;
+    private static final int NUM_EMPTY_NOTES = 15;
 
 
-    public static int counterNotes = 0;
-    public static int maxNumberNotes = 10;  //initial main.java.Notepad size
+    private int counterNotes = 0;
+    private int maxNumberNotes = 10;  //initial main.java.Notepad size
 
     private Note[] notes = new Note[maxNumberNotes];
 

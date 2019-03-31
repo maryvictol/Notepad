@@ -1,3 +1,5 @@
+package main.java;
+
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -19,7 +21,7 @@ public class Main {
         if (idNote != -1) {
             System.out.println(notepad.getAllNotes()[idNote].toString());
         } else {
-            System.out.println("The matched Note was not found. ");
+            System.out.println("The matched main.java.Note was not found. ");
         }
 
         //Search and delete Note by part of title

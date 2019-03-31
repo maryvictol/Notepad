@@ -16,7 +16,7 @@ public class Main {
         }
         notepad.printAllNotes(notepad.getAllNotes());
 
-        //Check search by nonexistent Note title
+        //Check search by nonexistent main.java.Note title
         int idNote=notepad.returnNoteByTitle("nnnnn");
         if (idNote != -1) {
             System.out.println(notepad.getAllNotes()[idNote].toString());
@@ -24,13 +24,13 @@ public class Main {
             System.out.println("The matched main.java.Note was not found. ");
         }
 
-        //Search and delete Note by part of title
+        //Search and delete main.java.Note by part of title
         idNote=notepad.returnNoteByTitle("e0");
         notepad.deleteNote(idNote);
         notepad.printAllNotes(notepad.getAllNotes());
 
 
-        //Search and edit Note by title
+        //Search and edit main.java.Note by title
         try {
             TimeUnit.SECONDS.sleep(10); //add delay in order to see change lastUpdatedDate
         } catch (InterruptedException e) {

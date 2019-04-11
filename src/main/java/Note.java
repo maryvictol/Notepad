@@ -34,6 +34,14 @@ public class Note {
         this.lastUpdatedDate = new Date();
     }
 
+    public Date getLastUpdatedDate() {
+        return lastUpdatedDate;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
     public String getDescription() {
         return description;
     }

@@ -58,13 +58,15 @@ public class Notepad {
 
     //public void delete(int numberNote) {
     public void deleteNote(int numberNote) {
-        System.arraycopy(notes, numberNote + 1, notes, numberNote, counterNotes - numberNote);
-        counterNotes--;
-        if (maxNumberNotes-counterNotes == NUM_EMPTY_NOTES) {
-            Note[] tempNotes = new Note[maxNumberNotes - NUM_REMOVE_NOTES];
-            System.arraycopy(notes, 0, tempNotes, 0, counterNotes);
-            notes = tempNotes;
-            maxNumberNotes -= NUM_REMOVE_NOTES;
+        if (numberNote > 0) {
+            System.arraycopy(notes, numberNote + 1, notes, numberNote, counterNotes - numberNote);
+            counterNotes--;
+            if (maxNumberNotes - counterNotes == NUM_EMPTY_NOTES) {
+                Note[] tempNotes = new Note[maxNumberNotes - NUM_REMOVE_NOTES];
+                System.arraycopy(notes, 0, tempNotes, 0, counterNotes);
+                notes = tempNotes;
+                maxNumberNotes -= NUM_REMOVE_NOTES;
+            }
         }
     }
 

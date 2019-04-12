@@ -8,7 +8,7 @@ public class Notepad {
 
 
     public int counterNotes = 0;
-    public int maxNumberNotes = 10;  //initial main.java.Notepad size
+    public int maxNumberNotes = 10;  //initial Notepad size
 
     private Note[] notes = new Note[maxNumberNotes];
 
@@ -42,7 +42,7 @@ public class Notepad {
         }
     }
 
-    //Search first main.java.Note by part of title
+    //Search first Note by part of title
     public int returnNoteByTitle(String title) {
         String noteName;
         for (int numNotes = 0; numNotes < notes.length; numNotes++) {
@@ -74,7 +74,7 @@ public class Notepad {
         if (numberNote >= 0 && numberNote <= counterNotes-1) {
             notes[numberNote].modifyNote(title,description);
         } else {
-            System.out.println("Please, check required main.java.Note number");
+            System.out.println("Please, check required Note number");
         }
     }
 

@@ -3,12 +3,13 @@ package main.java;
 public class Notepad {
 
     public static final double INCREASE_KOEFF = 1.5;
-    public static final int NUM_REMOVE_NOTES =10;
+    public static final int NUM_REMOVE_NOTES = 10;
     public static final int NUM_EMPTY_NOTES = 15;
 
 
-    public int counterNotes = 0;
-    public int maxNumberNotes = 10;  //initial main.java.Notepad size
+    private int counterNotes = 0;
+    //initial Notepad size
+    public int maxNumberNotes = 10;
 
     private Note[] notes = new Note[maxNumberNotes];
 
@@ -22,19 +23,20 @@ public class Notepad {
             maxNumberNotes = newMaxNumberNotes;
         }
         notes[counterNotes] = note;
-        counterNotes ++;
+        counterNotes++;
     }
 
     //Get all notes
     public Note[] getAllNotes() {
-        return notes;
+        return notes.clone();
     }
+
     //Print all notes
     public void printAllNotes(Note[] allNotes) {
         if (counterNotes == 0) {
             System.out.println("There aren't Notes in the Notepad!");
         } else {
-            for (int numNotes = 0; numNotes < counterNotes-1; numNotes++) {
+            for (int numNotes = 0; numNotes < counterNotes - 1; numNotes++) {
                 if (allNotes[numNotes] != null) {
                     System.out.println(allNotes[numNotes]);
                 }
@@ -53,29 +55,36 @@ public class Notepad {
                 }
             }
         }
-        return -1;  //The matched Note was not found.
+        //The matched Note was not found.
+        return -1;
     }
 
     //public void delete(int numberNote) {
-    public void deleteNote(int numberNote) {
-        if (numberNote > 0) {
-            System.arraycopy(notes, numberNote + 1, notes, numberNote, counterNotes - numberNote);
-            counterNotes--;
-            if (maxNumberNotes - counterNotes == NUM_EMPTY_NOTES) {
-                Note[] tempNotes = new Note[maxNumberNotes - NUM_REMOVE_NOTES];
-                System.arraycopy(notes, 0, tempNotes, 0, counterNotes);
-                notes = tempNotes;
-                maxNumberNotes -= NUM_REMOVE_NOTES;
-            }
+    public boolean deleteNote(int numberNote) {
+        if (numberNote <= 0 || numberNote > counterNotes) {
+            return false;
         }
+        System.arraycopy(notes, numberNote + 1, notes, numberNote, counterNotes - numberNote);
+        counterNotes--;
+        if (maxNumberNotes - counterNotes == NUM_EMPTY_NOTES) {
+            Note[] tempNotes = new Note[maxNumberNotes - NUM_REMOVE_NOTES];
+            System.arraycopy(notes, 0, tempNotes, 0, counterNotes);
+            notes = tempNotes;
+            maxNumberNotes -= NUM_REMOVE_NOTES;
+        }
+        return true;
     }
 
     public void editNote(int numberNote, String title, String description) {
-        if (numberNote >= 0 && numberNote <= counterNotes-1) {
-            notes[numberNote].modifyNote(title,description);
+        if (numberNote >= 0 && numberNote <= counterNotes - 1) {
+            notes[numberNote].modifyNote(title, description);
         } else {
-            System.out.println("Please, check required main.java.Note number");
+            System.out.println("Please, check required Note number");
         }
+    }
+
+    public int getCounterNotes() {
+        return counterNotes;
     }
 
 }

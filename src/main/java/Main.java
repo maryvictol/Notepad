@@ -43,7 +43,7 @@ public class Main {
 
         //Delete all Notes
 
-        for (int j = notepad.counterNotes-1; j >= 0; j--) {
+        for (int j = notepad.getCounterNotes()-1; j >= 0; j--) {
             notepad.deleteNote(j);
         }
 

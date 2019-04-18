@@ -2,7 +2,6 @@ package test.java;
 
 import main.java.Note;
 import main.java.Notepad;
-
 import org.junit.Test;
 
 import java.util.Date;
@@ -13,15 +12,13 @@ import static org.junit.Assert.*;
 public class NotepadTest {
 
     //Add 25 Notes to empty Notepad
-
     @Test
     public void addNoteToNotebook() {
-    Notepad notepad = new Notepad();
-    Date date = new Date();
-    notepad.addNote(new Note("note", "description", date, date));
-    assertEquals("Notepad ", notepad.maxNumberNotes, notepad.getAllNotes().length);
+        Notepad notepad = new Notepad();
+        Date date = new Date();
+        notepad.addNote(new Note("note", "description", date, date));
+        assertEquals("Notepad ", notepad.maxNumberNotes, notepad.getAllNotes().length);
     }
-
 
     @Test
     public void addSeveralNotesToEmptyNotepad() {
@@ -31,7 +28,7 @@ public class NotepadTest {
             notepad.addNote(new Note("note" + j, "description" + j, date, date));
         }
         int counter = 0;
-        for (int i = 0; i < notepad.getAllNotes().length; i ++)
+        for (int i = 0; i < notepad.getAllNotes().length; i++)
             if (notepad.getAllNotes()[i] != null) {
                 counter++;
             }
@@ -65,9 +62,34 @@ public class NotepadTest {
         for (int j = 0; j <= 25; j++) {
             notepad.addNote(new Note("note" + j, "description" + j, date, date));
         }
-        int initialCountNotes = notepad.counterNotes;
-        notepad.deleteNote(notepad.returnNoteByTitle("e000"));
-        assertEquals("Not Existing Note: ", initialCountNotes, notepad.counterNotes);
+        int initialCountNotes = notepad.getCounterNotes();
+        boolean flag = notepad.deleteNote(notepad.returnNoteByTitle("e000"));
+        assertFalse("Incorrect Note deletion:  ", flag);
+        assertEquals("Not Existing Note: ", initialCountNotes, notepad.getCounterNotes());
+    }
+
+    @Test
+    public void deleteNoteWithIdLessZero() {
+        Notepad notepad = new Notepad();
+        Date date = new Date();
+        for (int j = 0; j <= 25; j++) {
+            notepad.addNote(new Note("note" + j, "description" + j, date, date));
+        }
+        int initialCountNotes = notepad.getCounterNotes();
+        boolean flag = notepad.deleteNote(-1);
+        assertFalse("Incorrect Note deletion:  ", flag);
+    }
+
+    @Test
+    public void deleteNoteWithIdMoreCounterNotes() {
+        Notepad notepad = new Notepad();
+        Date date = new Date();
+        for (int j = 0; j <= 25; j++) {
+            notepad.addNote(new Note("note" + j, "description" + j, date, date));
+        }
+        int initialCountNotes = notepad.getCounterNotes();
+        boolean flag = notepad.deleteNote(initialCountNotes+1);
+        assertFalse("Incorrect Note deletion:  ", flag);
     }
 
     @Test
@@ -77,9 +99,9 @@ public class NotepadTest {
         for (int j = 0; j <= 25; j++) {
             notepad.addNote(new Note("note" + j, "description" + j, date, date));
         }
-        int initialCountNotes = notepad.counterNotes;
+        int initialCountNotes = notepad.getCounterNotes();
         notepad.deleteNote(notepad.returnNoteByTitle("e6"));
-        assertEquals("Count Notes: ", initialCountNotes-1, notepad.counterNotes);
+        assertEquals("Count Notes: ", initialCountNotes - 1, notepad.getCounterNotes());
         assertEquals("Existing Note is deleted: ", -1, notepad.returnNoteByTitle("e6"));
     }
 
@@ -96,10 +118,10 @@ public class NotepadTest {
             e.printStackTrace();
         }
         int noteNumber = notepad.returnNoteByTitle("note7");
-        notepad.editNote(noteNumber,"note7-new","description7-new");
+        notepad.editNote(noteNumber, "note7-new", "description7-new");
         assertEquals("title: ", "note7-new", notepad.getAllNotes()[noteNumber].getTitle());
         assertEquals("description: ", "description7-new", notepad.getAllNotes()[noteNumber].getDescription());
-        assertNotEquals("lastupdated : ", notepad.getAllNotes()[noteNumber].getCreatedDate(), notepad.getAllNotes()[noteNumber].getLastUpdatedDate());
+        assertNotEquals("lastupdated : ", notepad.getAllNotes()[noteNumber].getCreatedDate(),
+                                                  notepad.getAllNotes()[noteNumber].getLastUpdatedDate());
     }
-
 }
